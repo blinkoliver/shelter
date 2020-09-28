@@ -3,12 +3,14 @@ class Calculator {
     this.currentOperandText = currentOperandText;
     this.previousOperandText = previousOperandText;
     this.clear();
+    this.equals = false;
   }
 
   clear() {
     this.currentOperand = "";
     this.previousOperand = "";
     this.operation = undefined;
+    this.equals = false;
   }
 
   delete() {
@@ -19,50 +21,101 @@ class Calculator {
     if (number === "." && this.currentOperand.includes(".")) return;
     this.currentOperand = this.currentOperand.toString() + number.toString();
   }
+  addMinus() {
+    if (!isNaN(parseFloat(this.currentOperand))) {
+      this.currentOperand = (parseFloat(this.currentOperand) * -1).toString();
+    }
+    this.updateDisplay();
+  }
 
   chooseOperation(operation) {
     if (this.currentOperand === " ") return;
     if (this.previousOperand !== " " && this.previousOperand !== " ") {
       this.compute();
     }
+    if (operation === "√") {
+      this.extractSqr();
+      return;
+    }
     this.operation = operation;
     this.previousOperand = this.currentOperand;
     this.currentOperand = " ";
   }
 
+  pressEquals() {
+    this.equals = true;
+    this.compute();
+  }
+
+  extractSqr() {
+    if (this.currentOperand < 0) {
+      alert("Cannot extract the square root from a negative number");
+    } else {
+      this.currentOperand = Math.sqrt(this.currentOperand);
+      this.updateDisplay();
+    }
+  }
+
   compute() {
-    let computation;
+    let result;
     const prev = parseFloat(this.previousOperand);
-    const current = parseFloat(this.currentOperand);
+    const current = parseFloat(this.currentOperand) || " ";
     if (isNaN(prev) || isNaN(current)) return;
     switch (this.operation) {
       case "+":
-        computation = prev + current;
+        result = prev * 10000 + current * 10000;
+        this.currentOperand = result / 10000;
+        this.operation = undefined;
+        this.previousOperand = " ";
         break;
       case "-":
-        computation = prev - current;
+        result = prev * 10000 - current * 10000;
+        this.currentOperand = result / 10000;
+        this.operation = undefined;
+        this.previousOperand = " ";
         break;
       case "*":
-        computation = prev * current;
+        result = prev * current;
+        this.currentOperand = result;
+        this.operation = undefined;
+        this.previousOperand = " ";
         break;
       case "÷":
-        computation = prev / current;
+        if (current === 0) {
+          result = "Cannot divide by zero";
+        } else {
+          result = prev / current;
+          this.currentOperand = result;
+          this.operation = undefined;
+          this.previousOperand = " ";
+        }
         break;
       case "√":
-        computation = prev ** current;
+        if (prev < 0) {
+          result = "Cannot extract the square root from a negative number.";
+        } else {
+          result = Math.sqrt(prev);
+          this.updateDisplay();
+          this.currentOperand = result;
+          this.operation = undefined;
+          this.previousOperand = " ";
+        }
+        break;
+      case "xy":
+        if (prev < 0 && current < 1) {
+          result = "For negative number exponent >= 1";
+        } else {
+          result = Math.pow(prev, current);
+          this.currentOperand = result;
+          this.operation = undefined;
+          this.previousOperand = " ";
+        }
+        break;
       default:
         return;
     }
-    this.currentOperand = computation;
-    this.operation = undefined;
-    this.previousOperand = " ";
   }
-    computeSq() {
-        
-    }
 
-
-    
   getDisplayNumber(number) {
     const stringNumber = number.toString();
     const integerDigits = parseFloat(stringNumber.split(".")[0]);
@@ -93,6 +146,9 @@ class Calculator {
     } else {
       this.previousOperandText.innerText = "";
     }
+    if (this.equals) {
+      this.clear();
+    }
   }
 }
 
@@ -104,8 +160,43 @@ const equals = document.querySelector("[data-equals]");
 const previousOperandText = document.querySelector("[data-previous-operand ]");
 const currentOperandText = document.querySelector("[data-current-operand ]");
 const allButons = document.querySelectorAll("button");
+const sqrButton = document.querySelector("[data-operation-sqr]");
+const addMinusButton = document.querySelector("[data-add-minus]");
 
 const calculator = new Calculator(currentOperandText, previousOperandText);
+
+numberButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    calculator.appendNumber(button.innerText);
+    calculator.updateDisplay();
+  });
+});
+
+operationButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    calculator.chooseOperation(button.innerText);
+    calculator.updateDisplay();
+  });
+});
+
+equals.addEventListener("click", () => {
+  calculator.pressEquals();
+  calculator.updateDisplay();
+});
+
+clearAllButton.addEventListener("click", () => {
+  calculator.clear();
+  calculator.updateDisplay();
+});
+
+deleteButton.addEventListener("click", () => {
+  calculator.delete();
+  calculator.updateDisplay();
+});
+
+addMinusButton.addEventListener("click", () => {
+  calculator.addMinus();
+});
 
 document.addEventListener("keyup", (event) => {
   switch (event.code) {
@@ -180,33 +271,4 @@ document.addEventListener("keyup", (event) => {
     default:
       return;
   }
-});
-
-numberButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    calculator.appendNumber(button.innerText);
-    calculator.updateDisplay();
-  });
-});
-
-operationButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    calculator.chooseOperation(button.innerText);
-    calculator.updateDisplay();
-  });
-});
-
-equals.addEventListener("click", (button) => {
-  calculator.compute();
-  calculator.updateDisplay();
-});
-
-clearAllButton.addEventListener("click", () => {
-  calculator.clear();
-  calculator.updateDisplay();
-});
-
-deleteButton.addEventListener("click", () => {
-  calculator.delete();
-  calculator.updateDisplay();
 });
