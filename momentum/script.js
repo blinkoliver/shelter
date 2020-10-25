@@ -12,7 +12,9 @@ const weatherIcon = document.querySelector(".weather-icon");
 const temperature = document.querySelector(".temperature");
 const weatherDescription = document.querySelector(".weather-description");
 const city = document.querySelector(".city");
-
+const humidity = document.querySelector(".humidity");
+const windSpeed = document.querySelector(".wind-speed");
+const errorMessage = document.querySelector(".error-message");
 // Date
 let today = new Date();
 let year = today.getFullYear();
@@ -103,48 +105,81 @@ let showDate = () => {
 };
 // Add Zeros
 let addZero = (n) => (parseInt(n, 10) < 10 ? "0" : "") + n;
-//Change background
-let count = new Date().getHours();
-let changeBackground = () => {
-  count += 1;
-  count = count % 24 || 0;
-  document.body.style.backgroundImage = `url(./assets/images/${dayPart}/${count}.jpg)`;
+//Create backgrounds sets arr
+let createRandomImagesSet = () => {
+  const result = [];
+  for (let i = 0; i < 6; i++) {
+    let random = Math.ceil(Math.random() * 23) + ".jpg";
+    if (!result.includes(random)) {
+      result.push(random);
+    } else {
+      i--;
+    }
+  }
+  return result;
 };
 
+let createImagesSet = (dayPart) => {
+  const result = [];
+  const images = createRandomImagesSet();
+  for (let i = 0; i < 6; i++) {
+    result.push(`./assets/images/${dayPart}/${images[i]}`);
+  }
+  return result;
+};
+
+let createImagesSetAllDay = () => {
+  const result = [];
+  const dayParts = ["night", "morning", "day", "evening"];
+  dayParts.forEach((element) => {
+    result.push(createImagesSet(element));
+  });
+  return result.flat();
+};
+
+const dayImagesArr = createImagesSetAllDay();
+
 // Set Background and Greeting
+let bgIndex=0;
+let changeBackground = (index) => {
+  const img = document.createElement("img");
+  const src = dayImagesArr[index];
+  console.log(src);
+  img.src = src;
+  img.onload = () => {
+    document.body.style.backgroundImage = `url(${src})`;
+  };
+};
+
 let setBgGreet = () => {
   let today = new Date(),
     hour = today.getHours();
+  changeBackground(hour);
   switch (true) {
     case hour >= 6 && hour < 12:
       //morning
       dayPart = "morning";
-      document.body.style.backgroundImage = `url(./assets/images/morning/${count}.jpg)`;
       greeting.textContent = "Доброе утро, ";
       break;
     case hour >= 12 && hour < 18:
       //day
       dayPart = "day";
-      document.body.style.backgroundImage = `url(./assets/images/day/${count}.jpg)`;
       greeting.textContent = "Добрый день, ";
       break;
     case hour >= 18 && hour < 24:
       //evening
       dayPart = "evening";
-      document.body.style.backgroundImage = `url(./assets/images/evening/${count}.jpg)`;
       greeting.textContent = "Добрый вечер, ";
       document.body.style.color = "white";
       break;
     default:
       //night
       dayPart = "night";
-      document.body.style.backgroundImage = `url(./assets/images/night/${count}.jpg)`;
       greeting.textContent = "Доброй ночи, ";
       document.body.style.color = "white";
       break;
   }
 };
-
 // Get Name
 let getName = () => {
   if (localStorage.getItem("name") === null) {
@@ -197,6 +232,33 @@ let setFocus = (e) => {
     getFocus();
   }
 };
+// Get City
+const getCity = () => {
+  if (localStorage.getItem("city") === null) {
+    city.textContent = "Введите город";
+  } else {
+    city.textContent = localStorage.getItem("city");
+  }
+};
+// Set City
+const setCity = (e) => {
+  if (e.type === "keypress") {
+    if (e.which === 13 || e.keyCode === 13) {
+      if (city.textContent.trim() === "") {
+        getCity();
+        city.blur();
+      } else {
+        localStorage.setItem("city", e.target.innerText);
+        getWeather();
+        city.blur();
+      }
+    }
+  } else if (e.type === "click") {
+    city.textContent = "";
+  } else {
+    getCity();
+  }
+};
 //Get Quote
 let getQuote = async () => {
   const url = `https://favqs.com/api/qotd`;
@@ -207,38 +269,60 @@ let getQuote = async () => {
 };
 //Get Weather
 let getWeather = async () => {
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.textContent}&lang=ru&appid=c3b6e8f10d1801b1a5c42ed7cda17b67&units=metric`;
-  const res = await fetch(url);
-  const data = await res.json();
-  weatherIcon.className = "weather-icon owf";
-  weatherIcon.classList.add(`owf-${data.weather[0].id}`);
-  temperature.textContent = `${data.main.temp}°C`;
-  weatherDescription.textContent = data.weather[0].description;
-};
-let setCity = (event) => {
-  if (event.code === "Enter") {
-    getWeather();
-    city.blur();
+  if (city.textContent !== "[Введите город]" && city.textContent.trim !== "") {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.textContent}&lang=ru&appid=c3b6e8f10d1801b1a5c42ed7cda17b67&units=metric`;
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data.message !== "city not found") {
+      weatherIcon.className = "weather-icon owf";
+      weatherIcon.classList.add(`owf-${data.weather[0].id}`);
+      temperature.textContent = `${data.main.temp}°C`;
+      humidity.textContent = `Влажность воздуха: ${data.main.humidity}%`;
+      windSpeed.textContent = `Скорость ветра: ${data.wind.speed} м/c`;
+      errorMessage.textContent = "";
+    } else {
+      errorMessage.textContent = "Город не найден";
+      weatherIcon.className = "weather-icon owf";
+      weatherIcon.style.display = "none";
+      temperature.textContent = "";
+      humidity.textContent = "";
+      windSpeed.textContent = "";
+    }
   }
 };
 
+//EventListeners
 name.addEventListener("keypress", setName);
 name.addEventListener("blur", setName);
 name.addEventListener("click", setName);
 focus.addEventListener("keypress", setFocus);
 focus.addEventListener("blur", setFocus);
 focus.addEventListener("click", setFocus);
-nextBackground.addEventListener("click", changeBackground);
-buttonRefreshQuote.addEventListener("click", getQuote);
 city.addEventListener("keypress", setCity);
-document.addEventListener("DOMContentLoaded", getQuote);
-document.addEventListener("DOMContentLoaded", getWeather);
+city.addEventListener("click", setCity);
+city.addEventListener("blur", setCity);
+let now = new Date().getTime();
+const delay = 1000;
+nextBackground.addEventListener("click", () => {
+  let start = new Date().getTime();
+  if (start - now <= 1000) {
+    return;
+  }
+  bgIndex++;
+  if (bgIndex > 23) {
+    bgIndex = 0;
+  }
+  changeBackground(bgIndex);
+  now = start;
+});
+buttonRefreshQuote.addEventListener("click", getQuote);
 
 // Run
-showTime();
-showDate();
-setBgGreet();
-getName();
-getFocus();
-getQuote();
-getWeather();
+document.addEventListener("DOMContentLoaded", showTime);
+document.addEventListener("DOMContentLoaded", showDate);
+document.addEventListener("DOMContentLoaded", setBgGreet);
+document.addEventListener("DOMContentLoaded", getName);
+document.addEventListener("DOMContentLoaded", getFocus);
+document.addEventListener("DOMContentLoaded", getCity);
+document.addEventListener("DOMContentLoaded", getWeather);
+document.addEventListener("DOMContentLoaded", getQuote);

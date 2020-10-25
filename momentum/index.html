@@ -3,22 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/owfont-regular.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./assets/owfont-master/css/owfont-regular.css">
     <link rel="stylesheet" href="style.css" />
     <title>momentum</title>
   </head>
   <body>
     <header>
-      <button class="next-background">Следующее фоновое изображение</button>
-      <div class="city" contenteditable="true">Минск</div>
-      <i class="weather-icon owf"></i>
-      <div class="temperature"></div>
-      <div class="weather-description"></div>
-    
+      <div class="background-slider">
+        <button class="next-background">Следующий фон</button>
+      </div>
+      <div class="weather">
+        <div class="city" contenteditable="true">Ведите город</div>
+        <i class="weather-icon owf"></i>
+        <div class="temperature"></div>
+        <div class="humidity"></div>
+        <div class="wind-speed"></div>
+        <div class="error-message"></div>
+      </div>
     </header>
     <main>
       <time class="today-time"></time>
