@@ -963,3 +963,117 @@ footer .container .location div:nth-of-type(2) {
     margin-top: 2.5625rem;
   }
 }
+
+
+.modal-wrapper {
+  position: fixed;
+  top: -100%;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background: rgba(41, 41, 41, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-wrapper:hover .modal-close {
+  transform: rotate(360deg);
+  background-color: #fddcc4;
+  transition: all 0.5s;
+}
+.modal-wrapper .modal {
+  width: 900px;
+  background: #fafafa;
+  border-radius: 9px;
+  display: flex;
+  position: fixed;
+}
+.modal-wrapper .modal:hover .modal-close {
+  transform: rotate(0deg);
+  background: rgba(41, 41, 41, 0);
+}
+.modal-wrapper .modal .modal-close {
+  position: absolute;
+  left: calc(100% - 10px);
+  top: -52px;
+  width: 52px;
+  height: 52px;
+  border: 2px solid #f1cdb3;
+  box-sizing: border-box;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-wrapper .modal .modal-close img {
+  display: block;
+}
+.modal-wrapper .modal .modal-close:hover {
+  transform: rotate(360deg);
+  background-color: #fddcc4;
+  transition: all 2s;
+}
+.modal-wrapper .modal .modal__image img {
+  display: block;
+  width: 500px;
+}
+.modal-wrapper .modal .pet-info {
+  padding: 50px 20px 0 29px;
+}
+.modal-wrapper .modal .pet-info .pet-info__name {
+  font-family: Georgia;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 35px;
+  line-height: 130%;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
+.modal-wrapper .modal .pet-info .pet-info__type {
+  font-family: Georgia;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 115%;
+  letter-spacing: 0.06em;
+  margin-bottom: 40px;
+}
+.modal-wrapper .modal .pet-info .pet-info__about {
+  font-family: Georgia;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 116%;
+  letter-spacing: 0.06em;
+  margin-bottom: 40px;
+}
+.modal-wrapper .modal .pet-info .pet-info__advantage li {
+  margin-bottom: 10px;
+  background-image: url(../../assets/icons/dot.svg);
+  background-repeat: no-repeat;
+  background-position: left center;
+  padding: 0 0 0 15px;
+}
+.modal-wrapper .modal .pet-info .pet-info__advantage li:last-child {
+  margin-bottom: 0;
+}
+.modal-wrapper .modal .pet-info .pet-info__advantage .key {
+  font-family: Georgia;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 120%;
+  letter-spacing: 0.06em;
+}
+.modal-wrapper .modal .pet-info .pet-info__advantage .value {
+  font-family: Georgia;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 116%;
+  letter-spacing: 0.06em;
+}
+
+.modal-wrapper_active {
+  top: 0;
+}
