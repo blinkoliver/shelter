@@ -1,4 +1,4 @@
-//burger
+//BURGER
 const burger = document.querySelector("#header .container > svg");
 const blurBody = document.querySelector(".unblur");
 const navigation = document.querySelector("#header .container nav");
@@ -22,92 +22,61 @@ addEventListener("mouseup", (event) => {
     headerLogo.classList.remove("header-logo-none");
   }
 });
-
-//render cards to slider
-const carusel = document.querySelector(
-  ".our-friends-wrapper .container .carusel"
-);
-const card = document.querySelector(
-  ".our-friends-wrapper .container .carusel .card"
-);
-const leftButton = document.querySelector(
-  ".our-friends-wrapper .container .carusel > button:nth-of-type(1)"
-);
-const rightButton = document.querySelector(
-  ".our-friends-wrapper .container .carusel > button:nth-of-type(2)"
-);
-const cards = document.querySelectorAll(
-  ".our-friends-wrapper .container .carusel .card"
-);
-let showCards = (pets) => {
-  pets.map((element) => {
-    let card = document.createElement("div");
-    let img = document.createElement("img");
-    img.src = element.img;
-    let button = document.createElement("button");
-    button.textContent = "Lear more";
-    let span = document.createElement("span");
-    span.textContent = element.name;
-    card.classList.add("card");
-    carusel.appendChild(card);
-    card.appendChild(img);
-    card.appendChild(span);
-    card.appendChild(button);
-  });
-};
-showCards(pets);
-
+//SLIDER
+//get number slides of slider
 let computeNumberItemsInSlider = () => {
   let width = window.innerWidth;
   if (width > 1279) return 3;
   else if (width > 767) return 2;
   else return 1;
 };
+//get random numbers for slider
 let currentPetNumbers = [];
-let getRandomNumbers = (maxNumber) => {
+let getRandomNumbers = () => {
   let numbers = [];
   let howManyNumbers = computeNumberItemsInSlider();
   while (numbers.length != howManyNumbers) {
-    let randomNumber = Math.ceil(Math.random() * maxNumber);
+    let randomNumber = Math.ceil(Math.random() * pets.length);
     if (![...currentPetNumbers, ...numbers].includes(randomNumber))
       numbers.push(randomNumber);
   }
   currentPetNumbers = [...numbers];
   return numbers;
 };
-let createSlideItem = (item, classForAnimation) => {
-  let petItem = document.createElement("div");
-  petItem.classList.add("pet-slider__item");
-  if (classForAnimation) petItem.classList.add(classForAnimation);
-  petItem.dataset.id = item.id;
+//create slide for slider
+let createOneSlide = (petObj, classForAnimation) => {
+  let card = document.createElement("div");
+  card.classList.add("card");
+  if (classForAnimation) card.classList.add(classForAnimation);
+  card.dataset.id = petObj.id;
 
-  let petItemImage = document.createElement("div");
-  petItemImage.classList.add("pet-slider__item-image");
+  let img = document.createElement("img");
+  img.src = petObj.img;
+  img.alt = petObj.name;
 
-  let image = document.createElement("img");
-  image.setAttribute("src", item.img);
-  image.setAttribute("alt", item.name);
-
-  let petName = document.createElement("div");
-  petName.classList.add("pet-slider__item-name");
-  petName.innerText = item.name;
+  let span = document.createElement("span");
+  span.textContent = petObj.name;
 
   let button = document.createElement("button");
-  button.classList.add("pet-slider__item-button");
-  button.innerText = "Learn more";
+  button.textContent = "Lear more";
 
-  petItemImage.append(image);
-  petItem.append(petItemImage, petName, button);
+  card.append(img, span, button);
 
-  return petItem;
+  return card;
 };
-let updateSlider = (classForAnimation) => {
-  let oldPetItems = document.querySelectorAll(".pet-slider__item");
+//inicialization slider
+let initSlider = (classForAnimation) => {
+  let oldPetItems = document.querySelectorAll(
+    ".our-friends-wrapper .container .carusel .card"
+  );
   oldPetItems.forEach((i) => i.classList.add(classForAnimation));
-  let sliderContainer = document.querySelector(".pet-slider__items");
+
+  let sliderContainer = document.querySelector(
+    ".our-friends-wrapper .container .carusel .items"
+  );
   let numbersForShow = getRandomNumbers(pets.length);
-  let petItems = numbersForShow.map((n) =>
-    createSlideItem(pets[n - 1], classForAnimation)
+  let petItems = numbersForShow.map((element) =>
+    createOneSlide(pets[element - 1], classForAnimation)
   );
 
   if (classForAnimation == "item_animation-left")
@@ -121,28 +90,45 @@ let updateSlider = (classForAnimation) => {
     oldPetItems.forEach((i) => i.remove());
   }, 480);
 };
-
+initSlider();
+//add listener at buttons
+const leftButton = document.querySelector(
+  ".our-friends-wrapper .container .carusel > button:nth-of-type(1)"
+);
+const rightButton = document.querySelector(
+  ".our-friends-wrapper .container .carusel > button:nth-of-type(2)"
+);
 leftButton.addEventListener("click", () => {
   leftButton.disabled = true;
   setTimeout(() => {
     leftButton.disabled = false;
   }, 500);
-  updateSlider("item_animation-left");
+  initSlider("item_animation-left");
 });
 rightButton.addEventListener("click", () => {
   rightButton.disabled = true;
   setTimeout(() => {
     rightButton.disabled = false;
   }, 500);
-  updateSlider("item_animation-right");
+  initSlider("item_animation-right");
 });
+//add listener for resize
 window.addEventListener("resize", () => {
-  if (currentPetNumbers.length != computeNumberItemsInSlider()) updateSlider();
+  if (currentPetNumbers.length != computeNumberItemsInSlider()) initSlider();
 });
 
-updateSlider();
+//POPUP
+let sliderContainer = document.querySelector(
+  ".our-friends-wrapper .container .carusel .items"
+);
+sliderContainer.addEventListener("click", (e) => {
+  let sliderItem = e.target.closest(".card");
+  if (!sliderItem) return;
+  let itemId = sliderItem.dataset.id;
+  fillModalWindow(pets.find((p) => p.id == itemId));
+  toggleModalWindow();
+});
 
-//popup
 let changeOverflow = () => {
   let overflowY = document.body.style.overflowY;
   document.body.style.overflowY = overflowY != "hidden" ? "hidden" : "visible";
@@ -170,15 +156,15 @@ let fillModalWindow = (item) => {
   petParasites.textContent = item.parasites.join(", ");
 };
 
+let modalWindow = document.querySelector(".modal-wrapper");
+
+modalWindow.addEventListener("click", (e) => {
+  if (!e.target.closest(".modal") || e.target.closest(".modal-close"))
+    toggleModalWindow();
+});
+
 let toggleModalWindow = () => {
   modalWindow.classList.toggle("modal-wrapper_active");
   changeOverflow();
 };
-cards.addEventListener("click", (e) => {
-  let sliderItem = e.target.closest(".pet-slider__item");
-  if (!sliderItem) return;
 
-  let itemId = sliderItem.dataset.id;
-  fillModalWindow(pets.find((p) => p.id == itemId));
-  toggleModalWindow();
-});

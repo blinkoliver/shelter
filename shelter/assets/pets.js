@@ -1,5 +1,6 @@
 let pets = [
   {
+    id: 1,
     name: "Jennifer",
     img: "../../assets/images/jennifer.png",
     type: "Dog",
@@ -12,6 +13,7 @@ let pets = [
     parasites: ["none"],
   },
   {
+    id: 2,
     name: "Sophia",
     img: "../../assets/images/sophia.png",
     type: "Dog",
@@ -24,6 +26,7 @@ let pets = [
     parasites: ["none"],
   },
   {
+    id: 3,
     name: "Woody",
     img: "../../assets/images/woody.png",
     type: "Dog",
@@ -36,6 +39,7 @@ let pets = [
     parasites: ["none"],
   },
   {
+    id: 4,
     name: "Scarlett",
     img: "../../assets/images/scarlett.png",
     type: "Dog",
@@ -48,6 +52,7 @@ let pets = [
     parasites: ["none"],
   },
   {
+    id: 5,
     name: "Katrine",
     img: "../../assets/images/katrine.png",
     type: "Cat",
@@ -60,6 +65,7 @@ let pets = [
     parasites: ["none"],
   },
   {
+    id: 6,
     name: "Timmy",
     img: "../../assets/images/timmy.png",
     type: "Cat",
@@ -72,6 +78,7 @@ let pets = [
     parasites: ["none"],
   },
   {
+    id: 7,
     name: "Freddie",
     img: "../../assets/images/freddie.png",
     type: "Cat",
@@ -84,6 +91,7 @@ let pets = [
     parasites: ["none"],
   },
   {
+    id: 8,
     name: "Charly",
     img: "../../assets/images/charly.png",
     type: "Dog",
