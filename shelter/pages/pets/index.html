@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>shelter</title>
+    <link rel="stylesheet" href="../pets/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+      integrity="sha512-oHDEc8Xed4hiW6CxD7qjbnI+B07vDdX7hEPTvn9pSZO1bcRqHp8mj9pyr+8RVC2GmtEfI2Bi9Ke9Ass0as+zpg=="
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <h1 class="visuallyhidden">Cozy House</h1>
+    <div class="modal-wrapper">
+      <div class="modal">
+        <div class="modal-close">
+          <span class="modal-close-button">x</span>
+        </div>
+        <div class="modal__image">
+          <img src="../../assets/images/jennifer.png" alt="pets-jennifer" />
+        </div>
+        <div class="pet-info">
+          <div class="pet-info__name">Jennifer</div>
+          <div class="pet-info__type">Dog - Labrador</div>
+          <div class="pet-info__about">
+            Jennifer is a sweet 2 months old Labrador that is patiently waiting
+            to find a new forever home. This girl really enjoys being able to go
+            outside to run and play, but won't hesitate to play up a storm in
+            the house if she has all of her favorite toys.
+          </div>
+          <ul class="pet-info__advantage">
+            <li class="pet-info__age">
+              <span class="key">Age:</span>
+              <span class="value">2 months</span>
+            </li>
+            <li class="pet-info__inoculations">
+              <span class="key">Inoculations:</span>
+              <span class="value">none</span>
+            </li>
+            <li class="pet-info__diseases">
+              <span class="key">Diseases:</span>
+              <span class="value">none</span>
+            </li>
+            <li class="pet-info__parasites">
+              <span class="key">Parasites:</span>
+              <span class="value">none</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <header id="header">
+      <div class="container">
+        <div class="header-logo">
+          <span>Cozy House</span><span> Shelter for pets in Boston </span>
+        </div>
+        <svg
+          class="burger"
+          width="30"
+          height="22"
+          viewBox="0 0 30 22"
+          xmlns="http://www.w3.org/2000/svg"
+          stroke="#000000"
+        >
+          <line y1="21" x2="30" y2="21" stroke-width="2" />
+          <line y1="11" x2="30" y2="11" stroke-width="2" />
+          <line y1="1" x2="30" y2="1" stroke-width="2" />
+        </svg>
+        <nav class="ham-navigation">
+          <div class="header-logo">
+            <span>Cozy House</span><span> Shelter for pets in Boston </span>
+          </div>
+          <ul>
+            <li><a href="../main/index.html">About the shelter</a></li>
+            <li><a>Our pets</a></li>
+            <li><a>Help the shelter</a></li>
+            <li><a>Contacts</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section class="our-friends">
+        <div class="container">
+          <h3>
+            Our friends who<br />
+            are looking for a house
+          </h3>
+          <div class="carusel"></div>
+          <div class="cards-container-navigation">
+            <button
+              class="pages__paginator arrow-to-start"
+              data-direction="toStart"
+            >
+              <<
+            </button>
+            <button
+              class="pages__paginator arrow-previous"
+              data-direction="previous"
+            >
+              <
+            </button>
+            <button class="pages__paginator page-number">1</button>
+            <button class="pages__paginator arrow-next" data-direction="next">
+              >
+            </button>
+            <button
+              class="pages__paginator arrow-to-end"
+              data-direction="toEnd"
+            >
+              >>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="container">
+        <div class="contacts">
+          <h3>For questions and suggestions</h3>
+          <div>
+            <img src="../../assets/icons/mail.svg" alt="mail" />
+            <a href="mailto:email@shelter.com" target="_blank"
+              >email@shelter.com</a
+            >
+          </div>
+          <div>
+            <img src="../../assets/icons/phone.svg" alt="phone" />
+            <a href="tel:+13 674 567 75 54" target="_blank"
+              >+13 674 567 75 54</a
+            >
+          </div>
+        </div>
+        <div class="location">
+          <h3>We are waiting for your visit</h3>
+          <div>
+            <img src="../../assets/icons/pin.svg" alt="pin" />
+            <a href="https://goo.gl/maps/qci8Z7GJcWr9myCj9" target="_blank"
+              >1 Central Street, Boston (entrance from the store)</a
+            >
+          </div>
+          <div>
+            <img src="../../assets/icons/pin.svg" alt="pin" />
+            <a href="https://goo.gl/maps/AmtZMAykcQS8MBUb7" target="_blank"
+              >18 South Park, London</a
+            >
+          </div>
+        </div>
+        <img src="../../assets/images/footer-puppy.png" alt="footer-puppy" />
+      </div>
+    </footer>
+    <div class="unblur"></div>
+  </body>
+  <script type="text/javascript" src="../../assets/pets.js"></script>
+  <script type="text/javascript" src="../pets/script.js"></script>
+</html>
