@@ -1,0 +1,433 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  transition: 0.7s;
+  scroll-behavior: smooth;
+  outline: none;
+}
+.visuallyhidden {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  -webkit-clip-path: inset(0px 0px 99.9% 99.9%);
+  clip-path: inset(0px 0px 99.9% 99.9%);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  border: 0;
+}
+.button {
+  width: 184px;
+  height: 46px;
+  color: white;
+  border: none;
+  background-color: #00afdb;
+  font-weight: 700;
+  font-size: 14px;
+}
+.button:hover {
+  cursor: pointer;
+  background: #009cc2;
+  border: none;
+}
+body {
+  width: 1600px;
+  margin: 0 auto;
+}
+header {
+  height: 96px;
+  background-color: black;
+}
+header nav {
+  height: 100%;
+}
+header nav ul {
+  display: flex;
+  flex-direction: row;
+  width: 1062px;
+  margin: 0 auto;
+  list-style-type: none;
+}
+header nav ul li {
+  color: white;
+  font-size: 14px;
+  line-height: 140%;
+  padding-top: 40px;
+  font-weight: 400;
+  height: 18px;
+}
+header nav ul li:hover {
+  cursor: pointer;
+  font-weight: 500;
+  border-bottom: solid white 1px;
+}
+header nav ul li:nth-of-type(1) {
+  margin-left: 233px;
+  font-weight: 500;
+  border-bottom: solid white 1px;
+  height: 18px;
+}
+header nav ul li:nth-of-type(2) {
+  margin-left: 86px;
+  width: 51px;
+}
+header nav ul li:nth-of-type(3) {
+  padding-top: 25px;
+  padding-left: 101px;
+}
+header nav ul li:nth-of-type(3):hover {
+  cursor: pointer;
+  border: none;
+}
+header nav ul li:nth-of-type(4) {
+  margin-left: 101px;
+  width: 53px;
+}
+header nav ul li:nth-of-type(5) {
+  margin-left: 83px;
+}
+.your-life {
+  height: 649px;
+  background: no-repeat url("./assets/bg-image.png");
+  background-position-y: bottom;
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+}
+.your-life h1 {
+  font-weight: 700;
+  font-size: 64px;
+  margin: 0;
+  color: white;
+  text-align: center;
+  padding: 136px 0px 0px 4px;
+  letter-spacing: 4.5px;
+}
+.your-life p {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25.2px;
+  padding-top: 21px;
+  width: 460px;
+  color: white;
+  text-align: center;
+  margin: 0 auto;
+}
+.your-life .social {
+  margin: 0 auto;
+  width: 170px;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 182px;
+}
+.your-life .social span img:hover {
+  cursor: pointer;
+  transform: rotate(360deg);
+}
+.your-life .button {
+  margin: 29px auto 0 auto;
+}
+.rappresent,
+.implement {
+  height: 842px;
+  width: 1064px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+.rappresent article {
+  display: flex;
+  flex-direction: column;
+}
+.rappresent article h1 {
+  font-weight: 700;
+  font-size: 24px;
+  width: 369px;
+  padding-top: 279px;
+  line-height: 28.13px;
+  letter-spacing: 1px;
+}
+.rappresent article p {
+  padding-top: 4px;
+  width: 407px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+.rappresent article button {
+  margin-top: 30px;
+}
+.rappresent-photo {
+  padding-top: 119px;
+  padding-right: 1px;
+}
+.our-community {
+  height: 504px;
+  background-color: #f5f6f7;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.our-community .navigation {
+  position: relative;
+  top: 81px;
+  width: 44px;
+  left: 1249px;
+  height: 20px;
+  display: flex;
+}
+.our-community .navigation img {
+  width: 14px;
+  height: 14px;
+}
+.our-community .navigation img:hover {
+  cursor: pointer;
+}
+.our-community .navigation img:nth-of-type(1) {
+  transform: rotate(180deg);
+  padding-bottom: 2px;
+  padding-left: 8px;
+}
+.our-community .navigation img:nth-of-type(2) {
+  padding-top: 2px;
+  padding-left: 6px;
+}
+.our-community .navigation span {
+  letter-spacing: 4px;
+  font-weight: 400;
+  font-size: 18px;
+}
+.our-community .about-community {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 298px;
+  height: 252px;
+  margin: 154px 0 0 226px;
+}
+.our-community .about-community h1 {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 2.4px;
+  width: 162px;
+  align-self: center;
+  padding-top: 9px;
+}
+.our-community .about-community p {
+  width: 298px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  padding-top: 1px;
+}
+
+.our-community .about-community img {
+  align-self: center;
+  width: 45px;
+  height: 45px;
+}
+.our-community .images-bar {
+  display: flex;
+  flex-direction: row;
+  height: 244px;
+  padding: 119px 0 0 138px;
+}
+.our-community .images-bar img {
+  padding-right: 30px;
+}
+.implement {
+  flex-direction: row-reverse;
+}
+.implement article h1 {
+  font-weight: 700;
+  font-size: 24px;
+  width: 369px;
+  padding-top: 303px;
+  padding-right: 148px;
+  line-height: 28.13px;
+  letter-spacing: 1px;
+}
+.implement article p {
+  padding-top: 4px;
+  width: 407px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+.implement .rappresent-photo {
+  padding-left: 1px;
+}
+.implement .button {
+  width: 180px;
+  margin-top: 29px;
+}
+.subscribe {
+  height: 523px;
+  background: no-repeat url("./assets/pexels-christina-morillo-1181675\ 1.png");
+  text-align: center;
+}
+.subscribe h1 {
+  font-weight: 700;
+  font-size: 24px;
+  color: white;
+  margin: 0;
+  line-height: 28.13px;
+  letter-spacing: 1px;
+  padding-top: 200px;
+}
+.subscribe form {
+  padding-top: 29px;
+}
+.subscribe form input {
+  margin-left: 1px;
+  width: 316px;
+  height: 46px;
+  border: none;
+  padding-left: 24px;
+}
+.subscribe form input::placeholder {
+  font-size: 14px;
+  font-weight: 400;
+}
+.subscribe form button {
+  margin-top: 1px;
+  width: 65px;
+  height: 46px;
+  border: none;
+  background-color: #00afdb;
+  margin-left: -4px;
+}
+.subscribe form button::before {
+  content: url(./assets/fa-check.svg);
+}
+.subscribe form button:hover {
+  cursor: pointer;
+  background: #009cc2;
+}
+.download {
+  height: 464px;
+  background-color: #f5f6f7;
+  text-align: center;
+}
+.download h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 29px;
+  letter-spacing: 1px;
+  padding-top: 119px;
+}
+.download p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  width: 483px;
+  margin: 0 auto;
+  padding-top: 21px;
+}
+.download .button-block {
+  display: flex;
+  padding-top: 29px;
+  justify-content: center;
+}
+.download .button-block button {
+  border: none;
+  color: white;
+  background-color: #00afdb;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0px;
+  text-align: center;
+  width: 186px;
+  height: 46px;
+  display: flex;
+  flex-direction: row;
+}
+.download .button-block button:hover {
+  cursor: pointer;
+  background: #009cc2;
+}
+.download .button-block button div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.download .button-block button:nth-of-type(1) {
+  margin-right: 30px;
+}
+.download .button-block button div:nth-of-type(1) {
+  width: 128px;
+  height: 46px;
+}
+.download .button-block button div:nth-of-type(2) {
+  height: 46px;
+  width: 60px;
+  background: #009cc2;
+}
+.download .button-block button:nth-of-type(1) div:nth-of-type(2)::before {
+  content: url(./assets/icon-apple.svg);
+}
+.download .button-block button:nth-of-type(2) div:nth-of-type(2)::before {
+  content: url(./assets/icon-android.svg);
+}
+footer {
+  height: 184px;
+  background: #000000;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+footer .nav-items {
+  padding-left: 160px;
+  padding-bottom: 16px;
+  display: flex;
+  flex-direction: row;
+}
+footer .nav-items span {
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: left;
+  width: 65px;
+}
+footer .nav-items span:nth-of-type(3) {
+  width: 75px;
+}
+
+footer .nav-items span:hover {
+  cursor: pointer;
+  font-weight: 500;
+}
+footer .nav-items div:nth-of-type(1) {
+  border-left: 1px solid #4e4e4e;
+  padding: 0 10px;
+  margin: auto 0 auto -1px;
+  height: 8px;
+}
+footer .nav-items div:nth-of-type(2) {
+  border-left: 1px solid #4e4e4e;
+  padding: 0 10px;
+  margin: auto 0;
+  height: 8px;
+}
+footer .logo {
+  padding-left: 371px;
+  padding-bottom: 16px;
+}
+footer .copyright {
+  color: #818181;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: center;
+  padding-left: 449px;
+  padding-bottom: 16px;
+}

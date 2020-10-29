@@ -1,0 +1,118 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: 1s;
+  outline: none;
+  text-shadow: 1px 1px 2px grey, 0 0 1em grey;
+}
+
+i::before {
+  font-size: 3rem;
+}
+button {
+  height: 3rem;
+  width: 12rem;
+  border-radius: 6.25rem;
+  color: black;
+  background-color: lightslategray;
+  border: none;
+  font-size: 1.0625rem;
+  line-height: 1.375rem;
+  letter-spacing: 0.06em;
+}
+button:hover {
+  background-color: lightsteelblue;
+  cursor: pointer;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100vh;
+  background-size: cover;
+  color: #000000;
+  transition: background-image 1s ease-in-out;
+}
+header {
+  display: flex;
+  flex-direction: row;
+  padding-top: 2vh;
+  width: 100vw;
+  height: 30vh;
+  justify-content: space-around;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+  height: 50vh;
+}
+main .today-time {
+  font-size: xxx-large;
+}
+main .today-date {
+}
+main h1 .greeting {
+}
+main h1 .name {
+  display: inline-block;
+  width: initial;
+  text-align: left;
+}
+main h2 {
+  width: 100%;
+}
+main .focus {
+  display: inline-block;
+  width: fit-content;
+  margin: 0 auto;
+  text-align: center;
+}
+
+footer {
+  display: flex;
+  height: 15vh;
+  width: 100vw;
+  justify-content: space-around;
+}
+footer .button-refresh-quote {
+}
+footer .quote {
+  align-self: center;
+  width: 50vw;
+}
+footer .author {
+  align-self: flex-end;
+  width: 15vw;
+}
+
+@media screen and (max-width: 767px) and (min-width: 0px) {
+  header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    height: 40vh;
+  }
+  footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 30vh;
+  }
+  footer .quote {
+    align-self: center;
+    width: 80vw;
+  }
+  footer .author {
+    align-self: center;
+    width: 80vw;
+  }
+}
